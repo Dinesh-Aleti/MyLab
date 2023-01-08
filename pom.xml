@@ -4,7 +4,7 @@
   <groupId>com.dineshdevopslab</groupId>
   <artifactId>DineshDevOpsLab</artifactId>
   <packaging>war</packaging>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.4-SNAPSHOT</version>
   <name>DineshDevopsLab</name>
   <url>http://maven.apache.org</url>
   <dependencies>
