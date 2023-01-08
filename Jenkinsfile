@@ -26,7 +26,7 @@ pipeline{
         // stage3: Publish artifacts to Nexus
         stage('Publish to Nexus'){
             steps{
-                nexusArtifactUploader artifacts: [[artifactId: 'DineshDevOpsLab', classifier: '', file: '/var/lib/jenkins/workspace/PipelineJob/target/DineshDevOpsLab-0.0.4-SNAPSHOT.war', type: 'war']], credentialsId: 'fe5d625d-8b0e-4136-ae5a-51ee4e619e40', groupId: 'com.dineshdevopslab', nexusUrl: '172.20.10.156:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'DineshDevopsLab-SNAPSHOT', version: '0.0.4-SNAPSHOT'
+                nexusArtifactUploader artifacts: [[artifactId: 'DineshDevOpsLab', classifier: '', file: 'target/DineshDevOpsLab-0.0.4-SNAPSHOT.war', type: 'war']], credentialsId: 'fe5d625d-8b0e-4136-ae5a-51ee4e619e40', groupId: 'com.dineshdevopslab', nexusUrl: '172.20.10.156:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'DineshDevopsLab-SNAPSHOT', version: '0.0.4-SNAPSHOT'
             }
         }
 
