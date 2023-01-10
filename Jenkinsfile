@@ -64,27 +64,27 @@ pipeline{
             }
         }
 
-        // Stage 5 : Deploy
+        Stage 5 : Deploy
 
-        // stage ('Deploy to Tomcat'){
-        //     steps {
-        //         echo "Deploying ...."
-        //         sshPublisher(publishers: 
-        //         [sshPublisherDesc(
-        //             configName: 'Ansible_Controller', 
-        //             transfers: [
-        //                 sshTransfer(
-        //                     cleanRemote:f'ansible-playbook /opt/playbooks/installanddeploy.yaml -i /opt/playbooks/hosts',
-        //                     execTimeout: 120000
-        //                 )
-        //             ], 
-        //             usePromotionTimestamp: false, 
-        //             useWorkspaceInPromotion: false, 
-        //             verbose: false)
-        //             ])
+        stage ('Deploy to Tomcat'){
+            steps {
+                echo "Deploying ...."
+                sshPublisher(publishers: 
+                [sshPublisherDesc(
+                    configName: 'Ansible_Controller', 
+                    transfers: [
+                        sshTransfer(
+                            cleanRemote:f'ansible-playbook /opt/playbooks/installanddeploy.yaml -i /opt/playbooks/hosts',
+                            execTimeout: 120000
+                        )
+                    ], 
+                    usePromotionTimestamp: false, 
+                    useWorkspaceInPromotion: false, 
+                    verbose: false)
+                    ])
             
-        //     }
-        // }
+            }
+        }
 
         
     }
