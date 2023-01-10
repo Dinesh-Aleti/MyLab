@@ -74,7 +74,8 @@ pipeline{
                     configName: 'Ansible_Controller', 
                     transfers: [
                         sshTransfer(
-                            cleanRemote:f'ansible-playbook /opt/playbooks/installanddeploy.yaml -i /opt/playbooks/hosts',
+                            cleanRemote:false,
+                            execCommand: 'ansible-playbook /opt/playbooks/installanddeploy.yaml -i /opt/playbooks/hosts',
                             execTimeout: 120000
                         )
                     ], 
