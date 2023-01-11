@@ -67,26 +67,26 @@ pipeline{
 
         //Stage 5 : Deploy // This is done with the help of push over ssh plugin (ssh:publisher send build artifacts over ssh)
 
-        stage('Deploy to Tomcat'){ 
-            steps {
-                echo "Deploying ...."
-                sshPublisher(publishers: 
-                [sshPublisherDesc(
-                    configName: 'Ansible_Controller', 
-                    transfers: [
-                        sshTransfer(
-                            cleanRemote: false,
-                            execCommand: 'ansible-playbook /opt/playbooks/installanddeploy.yaml -i /opt/playbooks/hosts',
-                            execTimeout: 120000
-                        )
-                    ], 
-                    usePromotionTimestamp: false, 
-                    useWorkspaceInPromotion: false, 
-                    verbose: false)
-                    ])
+        // stage('Deploy to Tomcat'){ 
+        //     steps {
+        //         echo "Deploying ...."
+        //         sshPublisher(publishers: 
+        //         [sshPublisherDesc(
+        //             configName: 'Ansible_Controller', 
+        //             transfers: [
+        //                 sshTransfer(
+        //                     cleanRemote: false,
+        //                     execCommand: 'ansible-playbook /opt/playbooks/installanddeploy.yaml -i /opt/playbooks/hosts',
+        //                     execTimeout: 120000
+        //                 )
+        //             ], 
+        //             usePromotionTimestamp: false, 
+        //             useWorkspaceInPromotion: false, 
+        //             verbose: false)
+        //             ])
             
-            }
-        }
+        //     }
+        // }
          //Stage 6 : Deploy the build artifact to Docker
 
         stage('Deploy to Docker'){ 
