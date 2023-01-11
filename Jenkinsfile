@@ -30,8 +30,9 @@ pipeline{
             }
         }
 
-        // stage3: Publish artifacts to Nexus
-        stage('Publish to Nexus'){
+        // stage3: Publish artifacts to Nexus   //This is done with the help of nexus artifact uploader     (pipeline sysntax)
+
+        stage('Publish to Nexus'){      
             steps{
                 script {
 
@@ -64,9 +65,9 @@ pipeline{
             }
         }
 
-        //Stage 5 : Deploy
+        //Stage 5 : Deploy // This is done with the help of push over ssh plugin (ssh:publisher send build artifacts over ssh)
 
-        stage('Deploy to Tomcat'){
+        stage('Deploy to Tomcat'){ 
             steps {
                 echo "Deploying ...."
                 sshPublisher(publishers: 
@@ -74,7 +75,7 @@ pipeline{
                     configName: 'Ansible_Controller', 
                     transfers: [
                         sshTransfer(
-                            cleanRemote:false,
+                            cleanRemote: false,
                             execCommand: 'ansible-playbook /opt/playbooks/installanddeploy.yaml -i /opt/playbooks/hosts',
                             execTimeout: 120000
                         )
@@ -86,7 +87,28 @@ pipeline{
             
             }
         }
+         //Stage 6 : Deploy the build artifact to Docker
 
+        stage('Deploy to Docker'){ 
+            steps {
+                echo "Deploying ...."
+                sshPublisher(publishers: 
+                [sshPublisherDesc(
+                    configName: 'Ansible_Controller', 
+                    transfers: [
+                        sshTransfer(
+                            cleanRemote: false,
+                            execCommand: 'ansible-playbook /opt/playbooks/downloadanddeploy_docker.yaml -i /opt/playbooks/hosts',
+                            execTimeout: 120000
+                        )
+                    ], 
+                    usePromotionTimestamp: false, 
+                    useWorkspaceInPromotion: false, 
+                    verbose: false)
+                    ])
+            
+            }
+        }
         
     }
 
