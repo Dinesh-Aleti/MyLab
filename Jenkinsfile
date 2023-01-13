@@ -87,7 +87,8 @@ pipeline{
             
         //     }
         // }
-         //Stage 6 : Deploy the build artifact to Docker
+        
+        //Stage 6 : Deploy the build artifact to Docker
 
         stage('Deploy to Docker'){ 
             steps {
@@ -107,6 +108,17 @@ pipeline{
                     verbose: false)
                     ])
             
+            }
+        }
+
+        //Stage 6 : Publish the source code to Sonarqube
+
+        stage('Sonarqube Analysis'){
+            steps{
+                echo 'Source code published to sonarqube for SCA'
+                withSonarQubeEnv('sonarqube'){
+                    sh 'mvn sonar:sonar'
+                }
             }
         }
         
